@@ -6,9 +6,10 @@ from sheet import Sheet
 from datetime import date
 from interface import function
 
-NAME = ['//*[@id="__next"]/main/article/section/div[2]/div[1]/div/h1', '//*[@id="__next"]/main/article/section/div[3]/div[1]/div/h1']
-REGULARPRICE = ['//*[@id="blocoValores"]/div[3]/b']
-PRICE = ['//*[@id="blocoValores"]/div[2]/div[1]/div/h4']
+NAME = ['sc-fdfabab6-6.jNQQeD']
+REGULARPRICE = ['regularPrice']
+PRICE = ['sc-5492faee-2.ipHrwP.finalPrice']
+INFO = []
 
 class Kabum():
     def __init__(self, link):
@@ -20,9 +21,9 @@ class Kabum():
         self.take_data()
     
     def find_data(self, options: list):
-        for xpath in options:
+        for classname in options:
             try:
-                value = self.driver.find_element(By.XPATH, xpath).text
+                value = self.driver.find_element(By.CLASS_NAME, classname).text
                 return value
             except:
                 pass
@@ -47,5 +48,5 @@ class Kabum():
         self.create_sheet(name, data)
     
     def create_sheet(self, name, data):
-        Sheet(name).verifica(data)
+        Sheet(name).check(data)
         function.config_sheet_file(self.link)  
